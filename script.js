@@ -1,4 +1,4 @@
-let cash = 10;
+let cash = 0;
 let companyCount = 0;
 let factoryCount = 0;
 let bankCount = 0;
@@ -19,6 +19,16 @@ let carFactoryCount = 0;
 let rocketFactoryCount = 0;
 let nanoFactoryCount = 0;
 let fusionReactorCount = 0;
+let amusementParkCount = 0;
+let casinoCount = 0;
+let airportCount = 0;
+let hospitalCount = 0;
+let breweryCount = 0;
+let tvStudioCount = 0;
+let megaMallCount = 0;
+let militaryBaseCount = 0;
+let spaceXCount = 0;
+let cyberneticsLabCount = 0;
 
 const companyCost = 10;
 const factoryCost = 100;
@@ -40,6 +50,16 @@ const carFactoryCost = 100000000;
 const rocketFactoryCost = 500000000;
 const nanoFactoryCost = 1000000000;
 const fusionReactorCost = 5000000000;
+const amusementParkCost = 10000000000;
+const casinoCost = 50000000000;
+const airportCost = 100000000000;
+const hospitalCost = 500000000000;
+const breweryCost = 1000000000000;
+const tvStudioCost = 5000000000000;
+const megaMallCost = 10000000000000;
+const militaryBaseCost = 50000000000000;
+const spaceXCost = 100000000000000;
+const cyberneticsLabCost = 500000000000000;
 
 const companyIncome = 1;
 const factoryIncome = 10;
@@ -61,6 +81,16 @@ const carFactoryIncome = 1000000;
 const rocketFactoryIncome = 5000000;
 const nanoFactoryIncome = 10000000;
 const fusionReactorIncome = 50000000;
+const amusementParkIncome = 100000000;
+const casinoIncome = 500000000;
+const airportIncome = 1000000000;
+const hospitalIncome = 5000000000;
+const breweryIncome = 10000000000;
+const tvStudioIncome = 50000000000;
+const megaMallIncome = 100000000000;
+const militaryBaseIncome = 500000000000;
+const spaceXIncome = 1000000000000;
+const cyberneticsLabIncome = 5000000000000;
 
 const cashDisplay = document.getElementById('cash-display');
 const buildCompanyBtn = document.getElementById('build-company-btn');
@@ -83,6 +113,16 @@ const buildCarFactoryBtn = document.getElementById('build-carfactory-btn');
 const buildRocketFactoryBtn = document.getElementById('build-rocketfactory-btn');
 const buildNanoFactoryBtn = document.getElementById('build-nanofactory-btn');
 const buildFusionReactorBtn = document.getElementById('build-fusionreactor-btn');
+const buildAmusementParkBtn = document.getElementById('build-amusementpark-btn');
+const buildCasinoBtn = document.getElementById('build-casino-btn');
+const buildAirportBtn = document.getElementById('build-airport-btn');
+const buildHospitalBtn = document.getElementById('build-hospital-btn');
+const buildBreweryBtn = document.getElementById('build-brewery-btn');
+const buildTvStudioBtn = document.getElementById('build-tvstudio-btn');
+const buildMegaMallBtn = document.getElementById('build-megamall-btn');
+const buildMilitaryBaseBtn = document.getElementById('build-militarybase-btn');
+const buildSpaceXBtn = document.getElementById('build-spacex-btn');
+const buildCyberneticsLabBtn = document.getElementById('build-cyberneticslab-btn');
 
 // Initialize IndexedDB
 const dbName = 'incremental_game_db';
@@ -136,7 +176,17 @@ function saveGame() {
         carFactoryCount: carFactoryCount,
         rocketFactoryCount: rocketFactoryCount,
         nanoFactoryCount: nanoFactoryCount,
-        fusionReactorCount: fusionReactorCount
+        fusionReactorCount: fusionReactorCount,
+        amusementParkCount: amusementParkCount,
+        casinoCount: casinoCount,
+        airportCount: airportCount,
+        hospitalCount: hospitalCount,
+        breweryCount: breweryCount,
+        tvStudioCount: tvStudioCount,
+        megaMallCount: megaMallCount,
+        militaryBaseCount: militaryBaseCount,
+        spaceXCount: spaceXCount,
+        cyberneticsLabCount: cyberneticsLabCount
     };
 
     const request = objectStore.put(gameData);
@@ -179,6 +229,16 @@ function loadGame() {
             rocketFactoryCount = gameData.rocketFactoryCount;
             nanoFactoryCount = gameData.nanoFactoryCount;
             fusionReactorCount = gameData.fusionReactorCount;
+            amusementParkCount = gameData.amusementParkCount;
+            casinoCount = gameData.casinoCount;
+            airportCount = gameData.airportCount;
+            hospitalCount = gameData.hospitalCount;
+            breweryCount = gameData.breweryCount;
+            tvStudioCount = gameData.tvStudioCount;
+            megaMallCount = gameData.megaMallCount;
+            militaryBaseCount = gameData.militaryBaseCount;
+            spaceXCount = gameData.spaceXCount;
+            cyberneticsLabCount = gameData.cyberneticsLabCount;
 
             cashDisplay.textContent = `$${cash}`;
         }
@@ -209,6 +269,16 @@ buildCarFactoryBtn.addEventListener('click', buildCarFactory);
 buildRocketFactoryBtn.addEventListener('click', buildRocketFactory);
 buildNanoFactoryBtn.addEventListener('click', buildNanoFactory);
 buildFusionReactorBtn.addEventListener('click', buildFusionReactor);
+buildAmusementParkBtn.addEventListener('click', buildAmusementPark);
+buildCasinoBtn.addEventListener('click', buildCasino);
+buildAirportBtn.addEventListener('click', buildAirport);
+buildHospitalBtn.addEventListener('click', buildHospital);
+buildBreweryBtn.addEventListener('click', buildBrewery);
+buildTvStudioBtn.addEventListener('click', buildTvStudio);
+buildMegaMallBtn.addEventListener('click', buildMegaMall);
+buildMilitaryBaseBtn.addEventListener('click', buildMilitaryBase);
+buildSpaceXBtn.addEventListener('click', buildSpaceX);
+buildCyberneticsLabBtn.addEventListener('click', buildCyberneticsLab);
 
 function buildCompany() {
     if (cash >= companyCost) {
@@ -450,10 +520,130 @@ function buildFusionReactor() {
     }
 }
 
+function buildAmusementPark() {
+    if (cash >= amusementParkCost) {
+        cash -= amusementParkCost;
+        amusementParkCount++;
+        cashDisplay.textContent = `$${cash}`;
+        saveGame();
+        updateIncome();
+    } else {
+        alert("You don't have enough cash to build an amusement park!");
+    }
+}
+
+function buildCasino() {
+    if (cash >= casinoCost) {
+        cash -= casinoCost;
+        casinoCount++;
+        cashDisplay.textContent = `$${cash}`;
+        saveGame();
+        updateIncome();
+    } else {
+        alert("You don't have enough cash to build a casino!");
+    }
+}
+
+function buildAirport() {
+    if (cash >= airportCost) {
+        cash -= airportCost;
+        airportCount++;
+        cashDisplay.textContent = `$${cash}`;
+        saveGame();
+        updateIncome();
+    } else {
+        alert("You don't have enough cash to build an airport!");
+    }
+}
+
+function buildHospital() {
+    if (cash >= hospitalCost) {
+        cash -= hospitalCost;
+        hospitalCount++;
+        cashDisplay.textContent = `$${cash}`;
+        saveGame();
+        updateIncome();
+    } else {
+        alert("You don't have enough cash to build a hospital!");
+    }
+}
+
+function buildBrewery() {
+    if (cash >= breweryCost) {
+        cash -= breweryCost;
+        breweryCount++;
+        cashDisplay.textContent = `$${cash}`;
+        saveGame();
+        updateIncome();
+    } else {
+        alert("You don't have enough cash to build a brewery!");
+    }
+}
+
+function buildTvStudio() {
+    if (cash >= tvStudioCost) {
+        cash -= tvStudioCost;
+        tvStudioCount++;
+        cashDisplay.textContent = `$${cash}`;
+        saveGame();
+        updateIncome();
+    } else {
+        alert("You don't have enough cash to build a TV studio!");
+    }
+}
+
+function buildMegaMall() {
+    if (cash >= megaMallCost) {
+        cash -= megaMallCost;
+        megaMallCount++;
+        cashDisplay.textContent = `$${cash}`;
+        saveGame();
+        updateIncome();
+    } else {
+        alert("You don't have enough cash to build a mega mall!");
+    }
+}
+
+function buildMilitaryBase() {
+    if (cash >= militaryBaseCost) {
+        cash -= militaryBaseCost;
+        militaryBaseCount++;
+        cashDisplay.textContent = `$${cash}`;
+        saveGame();
+        updateIncome();
+    } else {
+        alert("You don't have enough cash to build a military base!");
+    }
+}
+
+function buildSpaceX() {
+    if (cash >= spaceXCost) {
+        cash -= spaceXCost;
+        spaceXCount++;
+        cashDisplay.textContent = `$${cash}`;
+        saveGame();
+        updateIncome();
+    } else {
+        alert("You don't have enough cash to build SpaceX!");
+    }
+}
+
+function buildCyberneticsLab() {
+    if (cash >= cyberneticsLabCost) {
+        cash -= cyberneticsLabCost;
+        cyberneticsLabCount++;
+        cashDisplay.textContent = `$${cash}`;
+        saveGame();
+        updateIncome();
+    } else {
+        alert("You don't have enough cash to build a cybernetics lab!");
+    }
+}
+
 function updateIncome() {
-    const totalIncome = companyCount * companyIncome + factoryCount * factoryIncome + bankCount * bankIncome + skyscraperCount * skyscraperIncome + mallCount * mallIncome + hotelCount * hotelIncome + restaurantCount * restaurantIncome + stadiumCount * stadiumIncome + techParkCount * techParkIncome + universityCount * universityIncome + shoppingCenterCount * shoppingCenterIncome + themeParkCount * themeParkIncome + researchLabCount * researchLabIncome + spaceportCount * spaceportIncome + arcadeCount * arcadeIncome + filmStudioCount * filmStudioIncome + carFactoryCount * carFactoryIncome + rocketFactoryCount * rocketFactoryIncome + nanoFactoryCount * nanoFactoryIncome + fusionReactorCount * fusionReactorIncome;
+    const totalIncome = companyCount * companyIncome + factoryCount * factoryIncome + bankCount * bankIncome + skyscraperCount * skyscraperIncome + mallCount * mallIncome + hotelCount * hotelIncome + restaurantCount * restaurantIncome + stadiumCount * stadiumIncome + techParkCount * techParkIncome + universityCount * universityIncome + shoppingCenterCount * shoppingCenterIncome + themeParkCount * themeParkIncome + researchLabCount * researchLabIncome + spaceportCount * spaceportIncome + arcadeCount * arcadeIncome + filmStudioCount * filmStudioIncome + carFactoryCount * carFactoryIncome + rocketFactoryCount * rocketFactoryIncome + nanoFactoryCount * nanoFactoryIncome + fusionReactorCount * fusionReactorIncome + amusementParkCount * amusementParkIncome + casinoCount * casinoIncome + airportCount * airportIncome + hospitalCount * hospitalIncome + breweryCount * breweryIncome + tvStudioCount * tvStudioIncome + megaMallCount * megaMallIncome + militaryBaseCount * militaryBaseIncome + spaceXCount * spaceXIncome + cyberneticsLabCount * cyberneticsLabIncome;
     cash += totalIncome;
     cashDisplay.textContent = `$${cash}`;
 }
 
-setInterval(updateIncome, 100); // Update income every second
+setInterval(updateIncome, 1000); // Update income every second
