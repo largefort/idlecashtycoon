@@ -456,4 +456,4 @@ function updateIncome() {
     cashDisplay.textContent = `$${cash}`;
 }
 
-setInterval(updateIncome, 1000); // Update income every second
+setInterval(updateIncome, 100); // Update income every second
