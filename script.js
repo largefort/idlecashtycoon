@@ -1,4 +1,4 @@
-let cash = 0;
+let cash = 10;
 let companyCount = 0;
 let factoryCount = 0;
 let bankCount = 0;
